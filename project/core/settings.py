@@ -138,13 +138,17 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CELERY_BROKER_URL = "redis://redis:6379"
 CELERY_RESULT_BACKEND = "redis://redis:6379"
 CELERY_BEAT_SCHEDULE = {
-    "sample_task": {
-        "task": "core.tasks.sample_task",
-        "schedule": crontab(minute="*/1"),
-    },
-    "send_email_report": {
-        "task": "core.tasks.send_email_report",
-        "schedule": crontab(hour="*/1"),
+    # "sample_task": {
+    #     "task": "core.tasks.sample_task",
+    #     "schedule": crontab(minute="*/1"),
+    # },
+    # "send_email_report": {
+    #     "task": "core.tasks.send_email_report",
+    #     "schedule": crontab(hour="*/1"),
+    # },
+    "task_process_notification": {
+        "task": "core.tasks.task_process_notification",
+        "schedule": crontab(),
     },
 }
 
