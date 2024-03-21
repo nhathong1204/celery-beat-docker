@@ -2,6 +2,7 @@ from celery import shared_task
 from celery.utils.log import get_task_logger
 from django.core.management import call_command
 import random
+from core.models import User
 
 import requests
 
@@ -38,3 +39,8 @@ def task_process_notification(self):
 # @shared_task(bind=True, base=BaseTaskWithRetry)
 # def task_process_notification(self):
 #     raise Exception()
+
+@shared_task()
+def task_send_welcome_email(user_pk):
+    user = User.objects.get(pk=user_pk)
+    logger.info(f'send email to {user.email} {user.pk}')
